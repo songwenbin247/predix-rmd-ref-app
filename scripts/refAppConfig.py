@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import subprocess
 import sys, getopt
@@ -7,9 +8,12 @@ def checkRequirements():
     try:
         cfTarget = subprocess.check_output(["cf", "target"])
         print (cfTarget)
-        user = cfTarget.decode('utf8').split('User:')[1].split('Org:')[0]
-        org = cfTarget.decode('utf8').split('Org:')[1].split('Space:')[0]
-        space = cfTarget.decode('utf8').split('Space')[1]
+        user = cfTarget.decode('utf8').split('user:')[1].split('org:')[0]
+        org = cfTarget.decode('utf8').split('org:')[1].split('space:')[0]
+        space = cfTarget.decode('utf8').split('space')[1]
+	print(user)
+	print(org)
+	print(space)
         print("cf login detected")
         return (user.strip(), org, space)
     except subprocess.CalledProcessError as e:

@@ -337,7 +337,7 @@ def getDataseedUrl(config):
 	if not hasattr(config,'DATA_SEED_URL') :
 		cfTarget= subprocess.check_output(["cf", "app",config.dataSeedAppName])
 		print (cfTarget)
-		config.DATA_SEED_URL="https://"+cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+		config.DATA_SEED_URL="https://"+cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 		print ('dataSeedAppName URL '+config.DATA_SEED_URL)
 
 def uploadFileToDataseed(url, data, files):
@@ -431,7 +431,7 @@ def getRMDDatasourceUrl(config):
 	if not hasattr(config,'RMD_DATASOURCE_URL') :
 		cfTarget= subprocess.check_output(["cf", "app",config.dataSourceAppName])
 		print (cfTarget)
-		config.RMD_DATASOURCE_URL="https://"+cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+		config.RMD_DATASOURCE_URL="https://"+cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 		print ('Data dataSourceAppName URL '+config.RMD_DATASOURCE_URL)
 
 def deployReferenceAppCreateDatasource(config):
@@ -471,7 +471,7 @@ def getWebsocketAppInfo(config):
 		print("****************** Running getWebsocketAppInfo ******************")
 		cfTarget= subprocess.check_output(["cf", "app",config.websocketAppName])
 		print (cfTarget)
-		config.WEB_SOCKET_SERVER_HOST=cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+		config.WEB_SOCKET_SERVER_HOST=cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 		print ('WS ingestion URL '+config.WEB_SOCKET_SERVER_HOST)
 		config.LIVE_DATA_WS_URL="wss://"+config.WEB_SOCKET_SERVER_HOST
 		print ('LIVE_DATA_WS_URL '+config.LIVE_DATA_WS_URL)
@@ -512,7 +512,7 @@ def deployReferenceAppCreateDataIngestion(config):
 
 		cfTarget= subprocess.check_output(["cf", "app",config.dataIngestionAppName])
 		print (cfTarget)
-		config.DATA_INGESTION_URL="https://"+cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+		config.DATA_INGESTION_URL="https://"+cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 		print ('Data Ingestion URL '+config.DATA_INGESTION_URL)
 		config.retryCount=0
 	except:
@@ -532,7 +532,7 @@ def deployReferenceAppCreateMachineSimulator(config):
 		getPredixUAAConfigfromVcaps(config)
 		cfTarget= subprocess.check_output(["cf", "app",config.dataExchangeAppName])
 		print (cfTarget)
-		config.DATA_EXCHANGE_HOST=cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+		config.DATA_EXCHANGE_HOST=cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 		config.DATA_EXCHANGE_URL="https://"+config.DATA_EXCHANGE_HOST
 		print ("DATA_EXCHANGE_URL : "+config.DATA_EXCHANGE_URL)
 		machineSimulatorRepoLocation = "fdh-router-service/data-exchange-simulator"
@@ -742,7 +742,7 @@ def sanityChecks(config):
 
 	cfTarget= subprocess.check_output(["cf", "app",config.uiAppName])
 	print (cfTarget)
-	config.uiUrl="https://"+cfTarget.decode('utf8').split('urls:')[1].strip().split('last uploaded:')[0].strip()
+	config.uiUrl="https://"+cfTarget.decode('utf8').split('routes:')[1].strip().split('last uploaded:')[0].strip()
 
 	getDataseedUrl(config)
 	getPredixUAAConfigfromVcaps(config)
